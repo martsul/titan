@@ -160,7 +160,7 @@ body.content {
 
 .service__decor:nth-child(2) {
   left: 150px;
-  top: 100%;
+  top: 80%;
   animation: swim 6s ease-in-out infinite;
 }
 
