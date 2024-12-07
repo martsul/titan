@@ -9,8 +9,6 @@ body {
   background: #000;
   max-width: 100vw;
   overflow: hidden;
-  overflow: visible;
-  overflow-x: hidden;
 }
 
 body.content {
@@ -155,19 +153,19 @@ body.content {
 }
 
 .service__decor {
-  height: 150px;
+  height: 250px;
   fill: #cce0f926;
   position: absolute;
 }
 
 .service__decor:nth-child(2) {
   left: 150px;
-  bottom: 100px;
+  top: 100%;
   animation: swim 6s ease-in-out infinite;
 }
 
 .service__decor:nth-child(1) {
-  right: 150px;
+  right: 100px;
   top: 100px;
   animation: swim-reverse 6s ease-in-out .3s infinite;
 }
