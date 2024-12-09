@@ -4,11 +4,14 @@ const amountSliders = document.querySelectorAll(".service__title").length;
 const serviceTitles = document.querySelectorAll(".service__title");
 const serviceText = document.querySelectorAll(".service__text");
 const serviceImg = document.querySelectorAll(".service__img");
+
 let serviceIteration = 0;
 
 let titleDuration = window.getComputedStyle(headerTitle)["animation-duration"];
 
 titleDuration = titleDuration.slice(0, titleDuration.length - 1) * 1000;
+
+window.scrollTo({ top: 0 });
 
 document.querySelector(".header").addEventListener("pointerdown", (event) => {
   event.preventDefault();

@@ -16,6 +16,11 @@ body.content {
   overflow-x: hidden;
 }
 
+section {
+  position: relative;
+  z-index: 1;
+}
+
 .header {
   background: #000;
   height: 100vh;
@@ -27,7 +32,7 @@ body.content {
   padding: 220px 0 100px;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
 }
 
 .header.hidden {
@@ -135,7 +140,7 @@ body.content {
 .header__svg {
   width: 200px;
   height: 200px;
-  filter: drop-shadow(0px 0px 5px rgb(204, 224, 249));
+  filter: drop-shadow(0px 0px 5px #cce0f9);
 }
 
 .content {
@@ -143,6 +148,19 @@ body.content {
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.content__titan {
+  font: 400 250px/1 var(--font);
+  color: #cce0f926;
+  letter-spacing: .15em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0px 0px 15px #cce0f98e;
+  filter: blur(5px);
+  animation: var(--animation-puls);
 }
 
 .service {
@@ -223,7 +241,7 @@ body.content {
 }
 
 .service__title {
-  text-shadow: 0px 0px 3px var(--blue);
+  text-shadow: 0px 0px 5px var(--blue);
   color: var(--blue);
   font: 400 85px/1 var(--font);
   letter-spacing: .1em;
@@ -235,7 +253,7 @@ body.content {
 
 .service__title.active {
   opacity: 1;
-  animation: flicker .5s ease-out 0s 1, puls 2s cubic-bezier(.46, .03, .52, .96) 1s infinite;
+  animation: flicker-fast .5s ease-out 0s 1, puls 2s cubic-bezier(.46, .03, .52, .96) 1s infinite;
 }
 
 .service__contents {
@@ -245,7 +263,7 @@ body.content {
 
 .service__text {
   color: #fff;
-  font: 400 20px/1.5 var(--font-r);
+  font: 400 20px/10px var(--font-r);
   letter-spacing: .1em;
   position: absolute;
   opacity: 0;
@@ -264,6 +282,10 @@ body.content {
   transform: none;
 }
 
+.service__text span {
+  font: 400 20px/1.5 var(--font-r);
+}
+
 .service__imgs {
   max-width: 450px;
   width: 100%;
@@ -274,10 +296,13 @@ body.content {
   opacity: 0;
   width: 100%;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 50%;
   transform: translate(0, -50%);
   transition: .2s ease;
+  filter: drop-shadow(0px 0px 5px rgb(204, 224, 249));
+  max-width: 350px;
+  animation: swaying 5s infinite;
 }
 
 .service__img.active {
@@ -305,6 +330,10 @@ body.content {
 .service__arr {
   width: 24px;
   height: 24px;
+}
+
+.treners__trener {
+  filter: drop-shadow(5px 5px 5px #000);
 }
 
 @keyframes flicker-in {
@@ -404,7 +433,7 @@ body.content {
   }
 }
 
-@keyframes flicker {
+@keyframes flicker-fast {
 
   0% {
     opacity: 0;
@@ -490,5 +519,19 @@ body.content {
 
   100% {
     transform: translate(0, 0);
+  }
+}
+
+@keyframes swaying {
+  0% {
+    transform: translate(0, -50%) skew(1deg);
+  }
+
+  50% {
+    transform: translate(0, -50%) skew(-1deg);
+  }
+
+  100% {
+    transform: translate(0, -50%) skew(1deg);
   }
 }
