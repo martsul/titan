@@ -11,9 +11,18 @@ let titleDuration = window.getComputedStyle(headerTitle)["animation-duration"];
 
 titleDuration = titleDuration.slice(0, titleDuration.length - 1) * 1000;
 
+// Function Preview Animation
+
+function previewAnimation() {
+  serviceTitles[serviceIteration].classList.add("active");
+  serviceText[serviceIteration].classList.add("active");
+  serviceImg[serviceIteration].classList.add("active");
+  document.querySelector(".service__subtitle").classList.add("active");
+}
+
 window.scrollTo({ top: 0 });
 
-document.querySelector(".header").addEventListener("pointerdown", (event) => {
+document.addEventListener("pointerdown", (event) => {
   event.preventDefault();
 });
 
@@ -29,28 +38,27 @@ document.querySelectorAll(".header__block").forEach((element) => {
 document.querySelector(".header__button").addEventListener("click", () => {
   document.querySelector(".header").classList.add("hidden");
   document.body.classList.add("content");
-  setTimeout(() => {
-    serviceTitles[serviceIteration].classList.add("active");
-    serviceText[serviceIteration].classList.add("active");
-    serviceImg[serviceIteration].classList.add("active");
-  }, 400);
+  setTimeout(previewAnimation, 400);
 });
 
 // Add content height
 
-function serviceContentHeight() {
+function serviceContentHeight(children, parent) {
   const textHeight = Math.max(
-    ...Array.from(document.querySelectorAll(".service__text")).map(
+    ...Array.from(document.querySelectorAll(`${children}`)).map(
       (element) => element.offsetHeight
     )
   );
 
-  document.querySelector(
-    ".service__contents"
-  ).style = `height: ${textHeight}px`;
+  document.querySelector(`${parent}`).style = `height: ${textHeight + 60}px`;
 }
 
-serviceContentHeight();
+serviceContentHeight(".service__text", ".service__contents");
+
+serviceContentHeight(
+  ".trainers__items, .trainers__trainer",
+  ".trainers__content"
+);
 
 document
   .querySelector(".service__buttons")
@@ -77,3 +85,61 @@ document
     serviceText[serviceIteration].classList.add("active");
     serviceImg[serviceIteration].classList.add("active");
   });
+
+let trainersIteration = 0;
+const trainers = document.querySelectorAll(".trainers__trainer");
+const trainersInfo = document.querySelectorAll(".trainers__items");
+const maxIteration = trainers.length;
+
+document
+  .querySelector(".trainers__buttons")
+  .addEventListener("click", (event) => {
+    trainers[trainersIteration].classList.remove("active");
+    trainersInfo[trainersIteration].classList.remove("active");
+
+    if (event.target.closest(".next")) {
+      if (trainersIteration >= maxIteration - 1) {
+        trainersIteration = 0;
+      } else {
+        trainersIteration++;
+      }
+    }
+
+    if (event.target.closest(".prev")) {
+      if (trainersIteration <= 0) {
+        trainersIteration = maxIteration - 1;
+      } else {
+        trainersIteration--;
+      }
+    }
+
+    trainers[trainersIteration].classList.add("active");
+    trainersInfo[trainersIteration].classList.add("active");
+  });
+
+// Scroll
+
+const trainersSection = document.querySelector(".trainers");
+
+function positionElement(element) {
+  const coords = document.querySelector(element).getBoundingClientRect();
+  const yCoords = coords.y;
+  const windowHeight = document.documentElement.clientHeight;
+
+  return windowHeight - yCoords;
+}
+
+window.addEventListener("scroll", (event) => {
+  // Trainers
+  const positionTrainers = positionElement(".trainers");
+
+  if (positionTrainers > 100) {
+    document.querySelector(".trainers .container").classList.add("active");
+  }
+
+  if (positionTrainers > 300) {
+    document.querySelector(".trainers__content").classList.add("active");
+  } else if (positionTrainers < 300) {
+    document.querySelector(".trainers__content").classList.remove("active");
+  }
+});
