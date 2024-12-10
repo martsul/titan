@@ -366,6 +366,7 @@ section {
   margin-bottom: 40px;
   letter-spacing: .1em;
   opacity: 0;
+  padding-right: 64px;
 }
 
 .container.active .trainers__title {
